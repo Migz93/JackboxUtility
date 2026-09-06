@@ -1,0 +1,18 @@
+{
+  "name": "Jackbox Utility Linux (x86_64)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "FLUTTER_VERSION": "3.35.1"
+    },
+    "options": ["--platform=linux/amd64"]
+  },
+  "workspaceFolder": "/workspaces/jackbox-launcher",
+  "remoteUser": "root",
+  "customizations": {
+    "vscode": {
+      "extensions": ["Dart-Code.flutter"]
+    }
+  }
+}
