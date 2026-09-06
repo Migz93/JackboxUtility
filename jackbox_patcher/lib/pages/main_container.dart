@@ -13,6 +13,9 @@ import 'package:jackbox_patcher/services/user/user_data.dart';
 import 'package:jackbox_patcher/services/windowManager/windows_manager_service.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../app_launch_options.dart';
+import 'tv_mode/tv_mode_page.dart';
+
 import '../components/notifications_caroussel.dart';
 import '../services/discord/discord_service.dart';
 import '../services/launcher/launcher.dart';
@@ -101,12 +104,14 @@ class _MainContainerState extends State<MainContainer> with WindowListener {
           color: const Color.fromARGB(1, 32, 32, 32).withOpacity(0.98),
         ),
         _loaded
-            ? Column(children: [
+            ? (AppLaunchOptions.tvMode
+                ? const TvModePage()
+                : Column(children: [
                 const Spacer(),
                 _buildUpper(),
                 _buildLower(),
                 const Spacer(),
-              ])
+              ]))
             : LoadingContainer(
                 step: (percent: loadingPercent, step: loadingStep, oldPercent: oldLoadingPercent),
                 exceptionReceived: loadingException,

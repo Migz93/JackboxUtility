@@ -4,11 +4,13 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
 import 'package:jackbox_patcher/app_configuration.dart';
+import 'package:jackbox_patcher/app_launch_options.dart';
 import 'package:jackbox_patcher/main.dart';
 import 'package:jackbox_patcher/services/arguments_handler/arguments_handler.dart';
 import 'package:jackbox_patcher/services/user/initial_load.dart';
 import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'services/logger/logger.dart';
 
@@ -32,6 +34,11 @@ void main(List<String> arguments) async {
       variables: {"masterServerUrl": MAIN_SERVER_URL["RELEASE_SERVER_URL"], "loggerLevel": Level.error});
 
   await InitialLoad.preInit();
+
+  AppLaunchOptions.read(arguments);
+  if (AppLaunchOptions.tvMode) {
+    await windowManager.setFullScreen(true);
+  }
 
   if (await ArgumentsHandler().handle(arguments)) {
     exit(0);
