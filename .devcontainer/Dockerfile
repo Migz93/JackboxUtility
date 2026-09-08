@@ -28,6 +28,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zip \
     && rm -rf /var/lib/apt/lists/*
 
+# Flutter's Linux tooling invokes clang by name. Use GCC 9 behind those names:
+# it is compatible with the Sentry native dependency on Ubuntu 20.04.
+RUN ln -s /usr/bin/gcc /usr/local/bin/clang \
+    && ln -s /usr/bin/g++ /usr/local/bin/clang++
+
 # Flutter's archive preserves its source-control ownership. Mark both the SDK
 # and bind-mounted workspace as trusted for Git in the container.
 RUN curl --fail --location --retry 3 \
