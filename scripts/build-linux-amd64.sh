@@ -28,7 +28,8 @@ flutter pub get
 # Upstream currently has a large existing lint backlog. Keep it visible, but
 # reserve a failed build for analyzer errors and actual compilation failures.
 flutter analyze --no-fatal-infos --no-fatal-warnings
-flutter build linux --release -t lib/main_release.dart
+flutter clean
+CC=gcc CXX=g++ flutter build linux --release -t lib/main_release.dart
 popd >/dev/null
 
 echo

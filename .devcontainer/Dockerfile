@@ -8,7 +8,7 @@ ENV PATH=${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin:${PATH}
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
-    clang \
+    build-essential \
     cmake \
     curl \
     default-jdk \
