@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     clang \
     cmake \
     curl \
+    libcurl4-openssl-dev \
     file \
     git \
     libgtk-3-dev \
