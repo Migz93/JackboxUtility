@@ -31,6 +31,10 @@ RUN curl --fail --location --retry 3 \
       --output /tmp/flutter.tar.xz \
     && tar -xJf /tmp/flutter.tar.xz --directory /opt \
     && rm /tmp/flutter.tar.xz \
+    # Flutter's archive preserves its source-control ownership. Mark both the
+    # SDK and bind-mounted workspace as trusted for Git in the container.
+    && git config --system --add safe.directory /opt/flutter \
+    && git config --system --add safe.directory /workspaces/jackbox-launcher \
     && flutter config --no-analytics --enable-linux-desktop \
     && flutter precache --linux \
     && flutter doctor -v
